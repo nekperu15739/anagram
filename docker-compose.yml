@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  redis:
+    image: redis:6.0.9-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+  anagram:
+    image: anagram:0.0.1-SNAPSHOT
+    container_name: anagram
+    environment:
+      SPRING_APPLICATION_JSON: '{
+            "spring.redis.host": "redis"
+          }'
+    ports:
+      - 8080:8080
