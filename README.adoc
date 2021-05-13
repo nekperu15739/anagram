@@ -1,0 +1,82 @@
+= Anagram service
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+== Run the anagram
+
+```sh
+docker run --rm -p 8080:8080 anagram:0.0.1-SNAPSHOT
+```
+
+= Run the service with dependency
+
+```sh
+docker-compose up
+```
+
+= request
+
+```sh
+curl --location --request POST 'http://localhost:8080/etechlog/anagrams' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJmYTE3OWI2Ny05Y2RkLTRlODEtOGZkOC1jOTI5ZjRhNDAyMzkiLCJzdWIiOiJNQVJBS0UiLCJleHAiOjE2NTA5MjQ4NTYsInNjb3BlIjpbImFuYWdyYW06d3JpdGUiXX0.iLzuQtQzMOYMC_TJ-B-Qt344eGhrjAhpLU51w7sRe_EXv2_CgY8jxjZdm9BY_qSGrnfSiGZ0GMahQk2C5fWmNsF5RYHRVkfqqEKCn9j3-xUnn3kJESXBTO0pmkY9QkpHwuKH5lXDcBwMEvhU4rP-GcIhOO561DBm9ZqU7BXDqGyj640hwG4SqT2u-mcR6bx26mz_diHOyIjRVwGOtjvOBPC39Ki13CSvZ7zwBPe56EQt3feaeZ8P4F377n7x0zdUXbPqNCZFhtk7MRA8pV2l7d4FRNasi6fc_MVGfCJvRl3LbnHuiCK5BKaHwQNCAPwPbQKMd8fh1Wmapmngv8v0bA'
+```
+
+= error on run native-image
+
+```sh
+2021-05-13 16:27:21.814  INFO 1 --- [           main] o.s.nativex.NativeListener               : This application is bootstrapped with code generated with Spring AOT
+
+.   ____          _            __ _ _
+/\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+\\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+'  |____| .__|_| |_|_| |_\__, | / / / /
+=========|_|==============|___/=/_/_/_/
+:: Spring Boot ::                (v2.4.5)
+
+2021-05-13 16:27:21.817  INFO 1 --- [           main] c.n.anagram.AnagramApplication           : Starting AnagramApplication using Java 11.0.10 on 7ddbde60c1ce with PID 1 (/workspace/com.nekperu15739.anagram.AnagramApplication started by cnb in /workspace)
+2021-05-13 16:27:21.817  INFO 1 --- [           main] c.n.anagram.AnagramApplication           : No active profile set, falling back to default profiles: default
+2021-05-13 16:27:21.848  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-13 16:27:21.848  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-13 16:27:21.850  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 1 Redis repository interfaces.
+2021-05-13 16:27:21.889  WARN 1 --- [           main] onfigReactiveWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'anagramHandler' defined in class path resource [com/nekperu15739/anagram/handler/AnagramHandler.class]: Initialization of bean failed; nested exception is com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined by interfaces [interface org.springframework.aop.SpringProxy, interface org.springframework.aop.framework.Advised, interface org.springframework.core.DecoratingProxy] not found. Generating proxy classes at runtime is not supported. Proxy classes need to be defined at image build time by specifying the list of interfaces that they implement. To define proxy classes use -H:DynamicProxyConfigurationFiles=<comma-separated-config-files> and -H:DynamicProxyConfigurationResources=<comma-separated-config-resources> options.
+2021-05-13 16:27:21.892  INFO 1 --- [           main] ConditionEvaluationReportLoggingListener :
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-05-13 16:27:21.893 ERROR 1 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'anagramHandler' defined in class path resource [com/nekperu15739/anagram/handler/AnagramHandler.class]: Initialization of bean failed; nested exception is com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined by interfaces [interface org.springframework.aop.SpringProxy, interface org.springframework.aop.framework.Advised, interface org.springframework.core.DecoratingProxy] not found. Generating proxy classes at runtime is not supported. Proxy classes need to be defined at image build time by specifying the list of interfaces that they implement. To define proxy classes use -H:DynamicProxyConfigurationFiles=<comma-separated-config-files> and -H:DynamicProxyConfigurationResources=<comma-separated-config-resources> options.
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:610) ~[na:na]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[na:na]
+at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[na:na]
+at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[na:na]
+at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[na:na]
+at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[na:na]
+at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944) ~[na:na]
+at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[na:na]
+at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[na:na]
+at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:63) ~[na:na]
+at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) ~[com.nekperu15739.anagram.AnagramApplication:2.4.5]
+at com.nekperu15739.anagram.AnagramApplication.main(AnagramApplication.java:13) ~[com.nekperu15739.anagram.AnagramApplication:na]
+Caused by: com.oracle.svm.core.jdk.UnsupportedFeatureError: Proxy class defined by interfaces [interface org.springframework.aop.SpringProxy, interface org.springframework.aop.framework.Advised, interface org.springframework.core.DecoratingProxy] not found. Generating proxy classes at runtime is not supported. Proxy classes need to be defined at image build time by specifying the list of interfaces that they implement. To define proxy classes use -H:DynamicProxyConfigurationFiles=<comma-separated-config-files> and -H:DynamicProxyConfigurationResources=<comma-separated-config-resources> options.
+at com.oracle.svm.core.util.VMError.unsupportedFeature(VMError.java:87) ~[na:na]
+at com.oracle.svm.reflect.proxy.DynamicProxySupport.getProxyClass(DynamicProxySupport.java:113) ~[na:na]
+at java.lang.reflect.Proxy.getProxyConstructor(Proxy.java:66) ~[na:na]
+at java.lang.reflect.Proxy.newProxyInstance(Proxy.java:1006) ~[na:na]
+at org.springframework.aop.framework.JdkDynamicAopProxy.getProxy(JdkDynamicAopProxy.java:126) ~[na:na]
+at org.springframework.aop.framework.ProxyFactory.getProxy(ProxyFactory.java:110) ~[na:na]
+at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.createProxy(AbstractAutoProxyCreator.java:467) ~[com.nekperu15739.anagram.AnagramApplication:5.3.6]
+at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary(AbstractAutoProxyCreator.java:341) ~[com.nekperu15739.anagram.AnagramApplication:5.3.6]
+at org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:290) ~[com.nekperu15739.anagram.AnagramApplication:5.3.6]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:437) ~[na:na]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1790) ~[na:na]
+at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[na:na]
+... 16 common frames omitted
+```
