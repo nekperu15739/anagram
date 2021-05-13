@@ -8,14 +8,15 @@ import com.nekperu15739.anagram.mapper.AnagramMapper;
 import com.nekperu15739.anagram.model.AnagramModel;
 import com.nekperu15739.anagram.persistence.repository.AnagramRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static reactor.core.publisher.Mono.just;
 
 @Component
 @RequiredArgsConstructor
@@ -26,14 +27,14 @@ public class CollectionsGenerateAnagram implements GenerateAnagram {
     private final AnagramRepository repository;
     private final AnagramMapper mapper;
 
-    /**
-     * Retrieves the userId to store the positions it in the persistence layer
-     * We're using defer() to reevaluate the saving. Might need some rework
-     * @return generated positions
-     */
     @Override
     public Mono<AnagramModel> generate() {
-        return just(mapper.toModel("userId", this.generateRandomList()))
+        return ReactiveSecurityContextHolder
+                .getContext()
+                .map(SecurityContext::getAuthentication)
+                .cast(AbstractAuthenticationToken.class)
+                .map(AbstractAuthenticationToken::getName)
+                .map(userId -> mapper.toModel(userId, this.generateRandomList()))
                 .map(mapper::toEntity)
                 .map(repository::save)
                 .map(mapper::toModel);
