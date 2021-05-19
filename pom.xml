@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.nekperu15739</groupId>
 	<artifactId>anagram</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>anagram</name>
 	<description>anagram using spring native</description>
 	<properties>
@@ -78,6 +78,7 @@
 						</exclude>
 					</excludes>
 					<image>
+						<name>nekperu15739/${project.artifactId}:${project.version}</name>
 						<builder>paketobuildpacks/builder:tiny</builder>
 						<env>
 							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
