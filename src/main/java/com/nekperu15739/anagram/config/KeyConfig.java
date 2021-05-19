@@ -7,6 +7,7 @@ package com.nekperu15739.anagram.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +23,7 @@ import java.util.Base64;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
+@EnableConfigurationProperties(KeyPairProperties.class)
 public class KeyConfig {
 
     @Bean

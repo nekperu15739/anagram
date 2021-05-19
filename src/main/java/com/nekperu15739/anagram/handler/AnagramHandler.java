@@ -10,13 +10,13 @@ import com.nekperu15739.anagram.resource.AnagramResource;
 import com.nekperu15739.anagram.service.GenerateAnagram;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.web.reactive.function.server.ServerResponse.created;
 
 @Slf4j
 @Component
@@ -26,11 +26,13 @@ public class AnagramHandler {
     private final GenerateAnagram anagramService;
     private final AnagramMapper anagramMapper;
 
-    @PreAuthorize("hasAuthority('anagram:write')")
     public Mono<ServerResponse> createAnagram(final ServerRequest request) {
-        return ok()
-                .body(anagramService.generate()
-                        .doOnNext(model -> log.info(model.toString()))
-                        .map(anagramMapper::toResource), AnagramResource.class);
+        return anagramService
+            .generate()
+            .map(anagramMapper::toResource)
+            .flatMap(resource ->
+                created(request.uriBuilder().pathSegment("{id}").build(resource.getId()))
+                    .contentType(APPLICATION_JSON)
+                    .bodyValue(resource));
     }
 }

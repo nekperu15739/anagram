@@ -25,6 +25,8 @@ public class AnagramMapperImpl implements AnagramMapper {
             anagramResource.positions( new ArrayList<Integer>( list ) );
         }
 
+        anagramResource.id(model.getUserId());
+
         return anagramResource.build();
     }
 
