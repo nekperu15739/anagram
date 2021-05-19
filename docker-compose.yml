@@ -7,7 +7,7 @@ services:
     ports:
       - 6379:6379
   anagram:
-    image: anagram:0.0.1-SNAPSHOT
+    image: anagram:0.1.1-SNAPSHOT
     container_name: anagram
     environment:
       SPRING_APPLICATION_JSON: '{

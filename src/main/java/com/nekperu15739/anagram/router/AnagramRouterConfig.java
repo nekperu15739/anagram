@@ -10,16 +10,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RequestPredicates.path;
-import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
 public class AnagramRouterConfig {
 
+    public static final String ANAGRAMS = "anagrams";
+
     @Bean
     public RouterFunction<ServerResponse> createAnagram(final AnagramHandler handler) {
-        return nest(path("etechlog"), route(POST("anagrams"), handler::createAnagram));
+        return route().POST(ANAGRAMS, handler::createAnagram).build();
     }
 }

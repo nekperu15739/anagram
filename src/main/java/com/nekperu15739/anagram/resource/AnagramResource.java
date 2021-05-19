@@ -4,6 +4,7 @@
 
 package com.nekperu15739.anagram.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AnagramResource {
 
+    @JsonIgnore
+    private String id;
     private List<Integer> positions;
 }

@@ -17,6 +17,9 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import java.security.interfaces.RSAPublicKey;
 
+import static com.nekperu15739.anagram.router.AnagramRouterConfig.ANAGRAMS;
+import static org.springframework.http.HttpMethod.POST;
+
 @Configuration
 @EnableWebFluxSecurity
 @RequiredArgsConstructor
@@ -29,6 +32,7 @@ public class SecurityConfig {
     SecurityWebFilterChain securityWebFilterChainGops(final ServerHttpSecurity http) {
         http
             .csrf().disable()
+            .authorizeExchange().pathMatchers(POST, ANAGRAMS).hasAuthority("anagram:write").and()
             .authorizeExchange().anyExchange().authenticated().and()
             .oauth2ResourceServer()
             .jwt()

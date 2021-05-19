@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.nekperu15739</groupId>
 	<artifactId>anagram</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>anagram</name>
 	<description>anagram using spring native</description>
 	<properties>
