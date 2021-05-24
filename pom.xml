@@ -15,8 +15,7 @@
 	<description>anagram using spring native</description>
 	<properties>
 		<java.version>11</java.version>
-<!--		<spring-native.version>0.9.2</spring-native.version>-->
-<!--		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>-->
+		<spring-native.version>0.9.2</spring-native.version>
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
 	</properties>
 	<dependencies>
@@ -53,15 +52,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.experimental</groupId>
 			<artifactId>spring-native</artifactId>
 			<version>${spring-native.version}</version>
-		</dependency>-->
-		<!--<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-kubernetes-config</artifactId>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-kubernetes-client-config</artifactId>
@@ -92,15 +87,15 @@
 					</excludes>
 					<image>
 						<name>nekperu15739/${project.artifactId}:${project.version}</name>
-<!--						<builder>paketobuildpacks/builder:tiny</builder>-->
-						<!--<env>
+						<builder>paketobuildpacks/builder:tiny</builder>
+						<env>
 							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-						</env>-->
+						</env>
 					</image>
 				</configuration>
 			</plugin>
 
-			<!--<plugin>
+			<plugin>
 				<groupId>org.springframework.experimental</groupId>
 				<artifactId>spring-aot-maven-plugin</artifactId>
 				<version>${spring-native.version}</version>
@@ -118,7 +113,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
 	</build>
 
