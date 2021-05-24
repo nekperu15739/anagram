@@ -5,6 +5,9 @@
 package com.nekperu15739.anagram.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.env.EnvironmentEndpoint;
+import org.springframework.boot.actuate.health.HealthEndpoint;
+import org.springframework.boot.actuate.info.InfoEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
@@ -18,6 +21,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import java.security.interfaces.RSAPublicKey;
 
 import static com.nekperu15739.anagram.router.AnagramRouterConfig.ANAGRAMS;
+import static org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest.to;
 import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
@@ -32,6 +36,7 @@ public class SecurityConfig {
     SecurityWebFilterChain securityWebFilterChainGops(final ServerHttpSecurity http) {
         http
             .csrf().disable()
+            .authorizeExchange().matchers(to(HealthEndpoint.class, InfoEndpoint.class, EnvironmentEndpoint.class)).permitAll().and()
             .authorizeExchange().pathMatchers(POST, ANAGRAMS).hasAuthority("anagram:write").and()
             .authorizeExchange().anyExchange().authenticated().and()
             .oauth2ResourceServer()

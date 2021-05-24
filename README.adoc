@@ -12,7 +12,7 @@ docker-compose up
 == request
 
 ```sh
-curl --location --request POST 'http://localhost:8080/etechlog/anagrams' \
+curl --location --request POST 'http://anagram.local/etechlog/anagrams' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiJmYTE3OWI2Ny05Y2RkLTRlODEtOGZkOC1jOTI5ZjRhNDAyMzkiLCJzdWIiOiJNQVJBS0UiLCJleHAiOjE2NTA5MjQ4NTYsInNjb3BlIjpbImFuYWdyYW06d3JpdGUiXX0.iLzuQtQzMOYMC_TJ-B-Qt344eGhrjAhpLU51w7sRe_EXv2_CgY8jxjZdm9BY_qSGrnfSiGZ0GMahQk2C5fWmNsF5RYHRVkfqqEKCn9j3-xUnn3kJESXBTO0pmkY9QkpHwuKH5lXDcBwMEvhU4rP-GcIhOO561DBm9ZqU7BXDqGyj640hwG4SqT2u-mcR6bx26mz_diHOyIjRVwGOtjvOBPC39Ki13CSvZ7zwBPe56EQt3feaeZ8P4F377n7x0zdUXbPqNCZFhtk7MRA8pV2l7d4FRNasi6fc_MVGfCJvRl3LbnHuiCK5BKaHwQNCAPwPbQKMd8fh1Wmapmngv8v0bA'
 ```

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-pod
+  namespace: anagram-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: redis-service
+  template:
+    metadata:
+      labels:
+        io.kompose.service: redis-service
+    spec:
+      containers:
+        - image: redis:6.0.9-alpine
+          name: redis
+          ports:
+            - containerPort: 6379
+      restartPolicy: Always

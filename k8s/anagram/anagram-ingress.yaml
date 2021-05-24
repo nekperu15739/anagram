@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: anagram-ingress
+  namespace: anagram-ns
+spec:
+  rules:
+    - host: anagram.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: anagram-api-service
+                port:
+                  number: 8080
