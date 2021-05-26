@@ -7,3 +7,4 @@ data:
   spring.redis.host: redis-service
   spring.webflux.base-path: etechlog
   management.endpoints.web.base-path: /insights
+  key-pair.rsa-private-key: ${PRIVATE_KEY}
